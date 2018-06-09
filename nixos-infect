@@ -236,9 +236,15 @@ infect() {
 
   # Stage the Nix coup d'état
   touch /etc/NIXOS
-  echo etc/nixos                   > /etc/NIXOS_LUSTRATE
-  echo etc/resolv.conf            >> /etc/NIXOS_LUSTRATE
-  echo root/.nix-defexpr/channels >> /etc/NIXOS_LUSTRATE
+  echo etc/nixos                         > /etc/NIXOS_LUSTRATE
+  echo etc/resolv.conf                  >> /etc/NIXOS_LUSTRATE
+  echo root/.nix-defexpr/channels       >> /etc/NIXOS_LUSTRATE
+
+  # Keep the ssh keys so that if you login into the host before the NixOSification, your known_hosts signature will still work after.
+  echo etc/ssh/ssh_host_ed25519_key     >> /etc/NIXOS_LUSTRATE
+  echo etc/ssh/ssh_host_ed25519_key.pub >> /etc/NIXOS_LUSTRATE
+  echo etc/ssh/ssh_host_rsa_key         >> /etc/NIXOS_LUSTRATE
+  echo etc/ssh/ssh_host_rsa_key.pub     >> /etc/NIXOS_LUSTRATE
 
   rm -rf /boot.bak
   mv -v /boot /boot.bak
