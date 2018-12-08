@@ -44,7 +44,12 @@ EOF
 }
 EOF
   
-  [ "$PROVIDER" = "digitalocean" ] && makeNetworkingConf
+  if [ "$PROVIDER" = "digitalocean" ]
+  then
+    makeNetworkingConf
+  else
+    true
+  fi
 }
 
 makeNetworkingConf() {
