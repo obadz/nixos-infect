@@ -12,7 +12,11 @@ makeConf() {
   local IFS=$'\n'; keys=($(grep -vE '^[[:space:]]*(#|$)' /root/.ssh/authorized_keys))
   local network_import=""
 
-  [ "$PROVIDER" = "digitalocean" ] && network_import="./networking.nix # generated at runtime by nixos-infect"
+    [ "$PROVIDER" = "vultr" ] && echo Provider is Vultr
+    [ "$PROVIDER" = "digitalocean" ] && network_import="./networking.nix # generated at runtime by nixos-infect"
+    [ "$PROVIDER" = "vultr" ] && echo Provider is Vultr2
+    sleep 5
+    [ "$PROVIDER" = "vultr" ] && echo Provider is Vultr3
   cat > /etc/nixos/configuration.nix << EOF
 { ... }: {
   imports = [
